@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <table>
+      {% for task in data%}
+      <tr>
+        <td class="title">
+          {% if task.is_completed == True %}
+          <b style="text-decoration: line-through">{{task.title}}:</b>
+          {% else %}
+          <b>{{task.title}}</b>
+          {% endif%}
+        </td>
+
+        <td>
+          <b>{{task.description}}</b>
+        </td>
+        <td>
+          <form action="update/{{task.id}}">
+            <input
+              style="margin-top: 10px"
+              class="button"
+              type="submit"
+              value="Update"
+            />
+          </form>
+        </td>
+        <td>
+          <form action="delete/{{task.id}}">
+            <input
+              style="margin-top: 10px"
+              class="button"
+              type="submit"
+              value="Delete"
+            />
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td class="date">Due date: {{task.end_date}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <button href="{% url 'create' %}">Add Task</button>
+  </body>
+</html>
